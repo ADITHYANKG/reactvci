@@ -8,7 +8,7 @@ workflows:
 jobs:
   build-and-test:
     docker:
-      - image: cimg/node:18.17 # Stable Node version for Vite
+      - image: cimg/node:20.19 # Stable Node version for Vite
     steps:
       - checkout
 
