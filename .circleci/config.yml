@@ -3,15 +3,23 @@ version: 2.1
 workflows:
   test-deploy:
     jobs:
-      - test
+      - build-and-test
 
 jobs:
-  test:
+  build-and-test:
     docker:
-      - image: cimg/node:24.7.0
+      - image: cimg/node:18.17 # Stable Node version for Vite
     steps:
       - checkout
-      - run: node --version
 
+      - run:
+          name: Install dependencies
+          command: npm install
 
-  
+      - run:
+          name: Run tests
+          command: npm test -- --watchAll=false
+
+      - run:
+          name: Build project
+          command: npm run build
